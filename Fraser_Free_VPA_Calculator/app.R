@@ -76,21 +76,24 @@ server <- function(input, output, session) {
           geom_errorbar(aes(xmin = lower, xmax = upper), color = "grey", position = position_dodge(width = 0.9), width = 0.001) +
           geom_point(color = "red", size = 2, shape = 15) +
           xlim(0, upper_ci + 10) +
-          labs(x = "Predicted Free VPA Concentration, mg/L", title = "Estimated Free VPA Level with 95% Confidence Interval") +
+          labs(x = "Estimated Free VPA Concentration, mg/L") +
           theme_bw() +
           theme(axis.title.y = element_blank(),
                 axis.text.y = element_blank(),  
                 axis.ticks.y = element_blank(),
                 panel.grid = element_blank(),
                 text = element_text(size = 16)) +
-          annotate("text", x = predicted_concentration, y = 0, label = paste("Therapeutic Range: 5-15 mg/L", "\nPredicted Level: ", 
-                                                                               round(predicted_concentration, 2), "mg/L \nInterpretation: ", 
-                                                                               ifelse(predicted_concentration < 5, "Subtherapeutic", 
-                                                                                      ifelse(predicted_concentration <= 15, "Therapeutic", "Supratherapeutic"))), 
+          annotate("text", x = ifelse(predicted_concentration < 0, 4,
+                                      ifelse(predicted_concentration < 5, predicted_concentration + 5,
+                                      predicted_concentration)), y = 0, 
+                   label = paste("Therapeutic Range: 5-15 mg/L", "\nPredicted Level: ", 
+                                 round(predicted_concentration, 2), "mg/L \nInterpretation: ", 
+                                 ifelse(predicted_concentration < 5, "Subtherapeutic", 
+                                        ifelse(predicted_concentration <= 15, "Therapeutic", "Supratherapeutic"))), 
                    hjust = 0.5, vjust = -1.5)
         
       })
-  })
+    })
 }
 
 # Run the application
