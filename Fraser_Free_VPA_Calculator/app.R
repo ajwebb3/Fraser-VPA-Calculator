@@ -70,7 +70,7 @@ server <- function(input, output, session) {
         library(ggplot2)
         
         ggplot(plot_data, aes(x = pred_conc, y = 0)) +
-          stat_function(fun = function(x) ifelse(x < 0 | x > upper_ci + 5, NA, 
+          stat_function(fun = function(x) ifelse(x < 0 | x < lower_ci - 5 | x > upper_ci + 5, NA, 
                                                  dnorm(x, mean = predicted_concentration, sd = sd_value)), 
                         color = "blue", size = 1.5) +
           geom_errorbar(aes(xmin = lower, xmax = upper), color = "grey", position = position_dodge(width = 0.9), width = 0.001) +
