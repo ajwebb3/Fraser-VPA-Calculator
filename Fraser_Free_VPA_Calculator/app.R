@@ -1,12 +1,3 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(shinydashboard)
 library(shinyjs)
@@ -25,7 +16,7 @@ ui <- fluidPage(
     radioButtons("propofol", "Propofol", choices = c("No", "Yes"), selected = "No"),
     helpText("Select Yes if the patient received propofol within 24 hours of the level being drawn."),
     radioButtons("aspirin", "Aspirin", choices = c("No", "Yes"), selected = "No"),
-    helpText("Select Yes if the patient received propofol within 24 hours of the level being drawn."),
+    helpText("Select Yes if the patient received aspirin within 24 hours of the level being drawn."),
     helpText(HTML(paste("Find more information on the Fraser equation <a href='https://journals.lww.com/ccejournal/fulltext/2023/10000/derivation_and_validation_of_a_new_equation_for.12.aspx' target='_blank'>here</a>."))),
     actionButton("calculate", "Calculate"),
     br(),
